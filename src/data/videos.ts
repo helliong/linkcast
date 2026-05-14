@@ -10,8 +10,6 @@ export const videos: Video[] = [
     thumbnailUrl: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
     platform: "youtube",
     category: "Frontend",
-    status: "approved",
-    authorName: "Telegram user",
     createdAt: "2026-05-14",
   },
   {
@@ -23,8 +21,6 @@ export const videos: Video[] = [
     thumbnailUrl: "https://img.youtube.com/vi/BwuLxPH8IDs/hqdefault.jpg",
     platform: "youtube",
     category: "TypeScript",
-    status: "approved",
-    authorName: "Telegram user",
     createdAt: "2026-05-14",
   },
   {
@@ -36,8 +32,6 @@ export const videos: Video[] = [
     thumbnailUrl: "https://img.youtube.com/vi/wm5gMKuwSYk/hqdefault.jpg",
     platform: "youtube",
     category: "Next.js",
-    status: "approved",
-    authorName: "Telegram user",
     createdAt: "2026-05-14",
   },
 ];
