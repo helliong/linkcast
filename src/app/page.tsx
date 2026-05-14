@@ -6,15 +6,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#070A12]">
       <Header />
-
+      <div className="absolute left-1/2 top-30 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[120px]" />
+      <div className="absolute right-5 top-100 h-[400px] w-[400px] rounded-full bg-violet-500/20 blur-[120px]" />
       <section className="relative overflow-hidden px-6 py-24 md:py-32">
-        <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-cyan-500/20 blur-[120px]" />
-        <div className="absolute right-0 top-40 h-[400px] w-[400px] rounded-full bg-violet-500/20 blur-[120px]" />
-
         <div className="relative mx-auto max-w-7xl">
           <div className="max-w-3xl">
-            
-
             <h1 className="mb-6 text-5xl font-bold tracking-tight text-white md:text-7xl">
               Видео-платформа, где контент добавляется через{" "}
               <span className="bg-gradient-to-r from-cyan-300 to-violet-400 bg-clip-text text-transparent">
@@ -23,9 +19,9 @@ export default function Home() {
             </h1>
 
             <p className="mb-10 max-w-2xl text-lg leading-8 text-white/60">
-              Пользователь отправляет ссылку на YouTube, Rutube или другую
-              платформу в Telegram-бота. Бот проверяет ссылку, отправляет видео
-              на модерацию и после одобрения оно появляется на сайте.
+              Отправляй ссылки на видео через нашего Telegram-бота, и после
+              модерации они появятся на сайте для всех пользователей. Легко,
+              быстро и удобно!
             </p>
 
             <div className="flex flex-col gap-4 sm:flex-row">
