@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clip Flow",
-  description: "Clip Flow - видео платформа, которая позволяет пользователям отправлять ссылки на видео через Telegram-бота. После модерации одобренные видео отображаются на сайте.",
+  title: "LinkCast - Видео платформа на основе Telegram бота",
+  description: "LinkCast - видео платформа, которая позволяет пользователям отправлять ссылки на видео через Telegram-бота. После модерации одобренные видео отображаются на сайте.",
 };
 
 export default function RootLayout({
@@ -30,4 +30,6 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
+
+  
 }
