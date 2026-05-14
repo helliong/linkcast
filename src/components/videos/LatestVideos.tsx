@@ -34,9 +34,7 @@ export function LatestVideos() {
           </h2>
         </div>
 
-        <p className="max-w-md text-sm leading-6 text-white/60">
-          Эти видео были отправлены через Telegram-бота и одобрены модератором.
-        </p>
+        
       </div>
 
       {videos.length > 0 ? (

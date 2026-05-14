@@ -1,8 +1,12 @@
 import json
 import uuid
-# import yt_dlp
+import requests
 from pathlib import Path
 from datetime import datetime
+from urllib.parse import urlparse, parse_qs
+
+from config import YOUTUBE_API_KEY
+
 
 BASE_DIR = Path(__file__).resolve().parents[1]
 VIDEOS_FILE = BASE_DIR / "public" / "data" / "videos.json"
@@ -31,9 +35,81 @@ def write_videos(videos):
         encoding="utf-8",
     )
 
+def get_youtube_video_id(url):
+    parsed_url = urlparse(url)
+
+    if parsed_url.netloc in ["www.youtube.com", "youtube.com", "m.youtube.com"]:
+        query = parse_qs(parsed_url.query)
+        return query.get("v", [None])[0]
+
+    if parsed_url.netloc in ["youtu.be", "www.youtu.be"]:
+        return parsed_url.path.strip("/")
+
+    if "youtube.com/shorts/" in url:
+        return parsed_url.path.split("/shorts/")[1].split("/")[0]
+
+    return None
+
+def get_youtube_metadata(url):
+    video_id = get_youtube_video_id(url)
+
+    if not video_id:
+        return None
+
+    if not YOUTUBE_API_KEY:
+        print("YOUTUBE_API_KEY не найден в .env")
+        return None
+
+    api_url = "https://www.googleapis.com/youtube/v3/videos"
+
+    params = {
+        "part": "snippet,contentDetails",
+        "id": video_id,
+        "key": YOUTUBE_API_KEY,
+    }
+
+    try:
+        response = requests.get(api_url, params=params, timeout=10)
+        response.raise_for_status()
+
+        data = response.json()
+        items = data.get("items", [])
+
+        if not items:
+            return None
+
+        item = items[0]
+        snippet = item.get("snippet", {})
+        content_details = item.get("contentDetails", {})
+
+        thumbnails = snippet.get("thumbnails", {})
+        thumbnail_url = (
+            thumbnails.get("maxres", {}).get("url")
+            or thumbnails.get("high", {}).get("url")
+            or thumbnails.get("medium", {}).get("url")
+            or thumbnails.get("default", {}).get("url")
+            or get_thumbnail_url(url)
+        )
+
+        return {
+            "title": snippet.get("title") or "YouTube video",
+            "description": snippet.get("description") or "Описание отсутствует.",
+            "thumbnailUrl": thumbnail_url,
+            "duration": content_details.get("duration"),
+            "uploader": snippet.get("channelTitle"),
+        }
+
+    except Exception as error:
+        print("Ошибка YouTube API:", error)
+        return None
 
 def get_video_metadata(url):
     if "youtube.com" in url or "youtu.be" in url:
+        metadata = get_youtube_metadata(url)
+
+        if metadata:
+            return metadata
+
         return {
             "title": "YouTube video",
             "description": "Видео было добавлено через Telegram-бота.",
@@ -133,13 +209,10 @@ def update_video_status(video_id, status):
 
 
 def get_embed_url(url):
-    if "youtube.com/watch?v=" in url:
-        video_id = url.split("watch?v=")[1].split("&")[0]
-        return f"https://www.youtube.com/embed/{video_id}"
+    youtube_id = get_youtube_video_id(url)
 
-    if "youtu.be/" in url:
-        video_id = url.split("youtu.be/")[1].split("?")[0]
-        return f"https://www.youtube.com/embed/{video_id}"
+    if youtube_id:
+        return f"https://www.youtube.com/embed/{youtube_id}"
 
     if "rutube.ru/video/" in url:
         video_id = url.split("rutube.ru/video/")[1].split("/")[0]
@@ -149,12 +222,9 @@ def get_embed_url(url):
 
 
 def get_thumbnail_url(url):
-    if "youtube.com/watch?v=" in url:
-        video_id = url.split("watch?v=")[1].split("&")[0]
-        return f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg"
+    youtube_id = get_youtube_video_id(url)
 
-    if "youtu.be/" in url:
-        video_id = url.split("youtu.be/")[1].split("?")[0]
-        return f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg"
+    if youtube_id:
+        return f"https://img.youtube.com/vi/{youtube_id}/hqdefault.jpg"
 
     return "/images/no-placeholder.jpg"

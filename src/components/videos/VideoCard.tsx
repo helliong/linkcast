@@ -19,11 +19,7 @@ export function VideoCard({ video }: VideoCardProps) {
             {video.platform}
           </div>
 
-          <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition group-hover:opacity-100">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-black">
-              ▶
-            </div>
-          </div>
+          
         </div>
 
         <div className="p-5">

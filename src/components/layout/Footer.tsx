@@ -5,7 +5,7 @@ export function Footer() {
         <p>© {new Date().getFullYear()} ClipFlow. Video platform powered by Telegram bot. Made by <strong> <a href="https://github.com/helliong">helliong</a></strong></p>
 
         <div className="flex gap-5">
-          <a href="#" className="transition hover:text-white">
+          <a href="https://t.me/linkcast_video_bot" className="transition hover:text-white">
             Telegram
           </a>
           <a href="https://github.com/helliong/linkcast" className="transition hover:text-white">

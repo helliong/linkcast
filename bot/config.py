@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-
+YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
 ADMIN_IDS_RAW = os.getenv("ADMIN_IDS", "")
 
 ADMIN_IDS = [
