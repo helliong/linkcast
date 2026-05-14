@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -15,3 +16,8 @@ ADMIN_IDS = [
 
 if not BOT_TOKEN:
     raise ValueError("BOT_TOKEN не найден. Проверь файл .env")
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+VIDEOS_FILE = BASE_DIR / "public" / "data" / "videos.json"
+
+print("VIDEOS_FILE:", VIDEOS_FILE)
