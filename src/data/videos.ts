@@ -1,0 +1,43 @@
+import type { Video } from "@/types/video";
+
+export const videos: Video[] = [
+  {
+    id: "1",
+    title: "React за 30 минут",
+    description: "Короткое обучающее видео по основам React.",
+    url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+    thumbnailUrl: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+    platform: "youtube",
+    category: "Frontend",
+    status: "approved",
+    authorName: "Telegram user",
+    createdAt: "2026-05-14",
+  },
+  {
+    id: "2",
+    title: "Основы TypeScript",
+    description: "Видео для тех, кто начинает писать на TypeScript.",
+    url: "https://www.youtube.com/watch?v=BwuLxPH8IDs",
+    embedUrl: "https://www.youtube.com/embed/BwuLxPH8IDs",
+    thumbnailUrl: "https://img.youtube.com/vi/BwuLxPH8IDs/hqdefault.jpg",
+    platform: "youtube",
+    category: "TypeScript",
+    status: "approved",
+    authorName: "Telegram user",
+    createdAt: "2026-05-14",
+  },
+  {
+    id: "3",
+    title: "Next.js App Router",
+    description: "Разбор структуры проекта на Next.js.",
+    url: "https://www.youtube.com/watch?v=wm5gMKuwSYk",
+    embedUrl: "https://www.youtube.com/embed/wm5gMKuwSYk",
+    thumbnailUrl: "https://img.youtube.com/vi/wm5gMKuwSYk/hqdefault.jpg",
+    platform: "youtube",
+    category: "Next.js",
+    status: "approved",
+    authorName: "Telegram user",
+    createdAt: "2026-05-14",
+  },
+];
